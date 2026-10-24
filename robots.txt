@@ -1,0 +1,10 @@
+# Robots.txt - 3D Angels
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://angels3d.com/sitemap.xml
+
+# Bloquear acesso a arquivos internos
+Disallow: /*.mp4
+Disallow: /release/

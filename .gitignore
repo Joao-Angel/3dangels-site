@@ -1,0 +1,22 @@
+# Pacotes de deploy gerados localmente
+/release/
+*.zip
+
+# Checkout antigo, separado dos arquivos do site
+/3Dangels site/
+
+# Credenciais e configuracoes locais
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencias, logs e arquivos temporarios
+node_modules/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

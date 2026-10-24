@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento Enviado | 3D Angels</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+  <link rel="manifest" href="favicons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/logo.png">
+  <style>
+    .obrigado-wrapper {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .obrigado-card {
+      max-width: 540px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow-hover);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      animation: fadeUp 0.6s var(--ease-fluid) both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .obrigado-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 0 12px rgba(34, 197, 94, 0.12);
+    }
+    .obrigado-card h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin: 0;
+    }
+    .obrigado-card p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 40ch;
+    }
+    .obrigado-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
+      background: transparent;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent-color);
+      background: rgba(0, 102, 204, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-island">
+    <a href="index.html">
+      <img src="img/logo.png" alt="3D Angels Logo" class="logo">
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" onclick="toggleMenu()">☰</button>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Catálogo</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="orcamento.html">Orçamento</a>
+      <a href="sobre.html">Sobre Nós</a>
+      <a href="https://pedidos.angels3d.com/">Acompanhar pedido</a>
+    </div>
+  </nav>
+
+  <main class="obrigado-wrapper">
+    <div class="obrigado-card">
+      <div class="obrigado-icon" aria-hidden="true">✓</div>
+      <h1>Solicitação enviada!</h1>
+      <p>
+        Recebemos seu pedido de orçamento. Nossa equipe vai analisar e retornar em até <strong>24 horas</strong> pelo e-mail ou WhatsApp informado.
+      </p>
+      <div class="obrigado-actions">
+        <a href="https://wa.me/5519991946309?text=Ol%C3%A1%21%20Acabei%20de%20enviar%20um%20pedido%20de%20or%C3%A7amento%20pelo%20site." target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          📱 Falar no WhatsApp
+        </a>
+        <a href="index.html" class="btn-secondary">
+          🛒 Ver catálogo
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js?v=8-scroll" defer></script>
+</body>
+</html>

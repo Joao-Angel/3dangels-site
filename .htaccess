@@ -1,0 +1,44 @@
+# Habilitar o motor de reescrita de URL
+RewriteEngine On
+
+# Revalidar páginas HTML para que novas versões de CSS/JS apareçam após o deploy.
+<IfModule mod_headers.c>
+  # Cache
+  <FilesMatch "\.(?:html?)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(?:css|js|png|jpe?g|svg|webp|mp4|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+
+  # Headers de segurança
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Não expor metadados de desenvolvimento, testes ou pacotes de publicação.
+RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
+RewriteRule ^(?:tests|release)(?:/|$) - [F,L,NC]
+
+# A home deve ter uma única URL pública.
+RewriteCond %{THE_REQUEST} \s/+index(?:\.html)?[\s?] [NC]
+RewriteRule ^index(?:\.html)?$ / [R=301,L,NC]
+
+# Redirecionar antigo catalogo para a home (index.html)
+RewriteRule ^catalogo(\.html)?$ / [R=301,L,NC]
+
+# Página de erro personalizada
+ErrorDocument 404 /404.html
+
+# Se o arquivo ou diretório real existir, não reescrever
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Adicionar .html internamente quando a URL não tiver extensão
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# (Opcional) Remover .html da URL se alguem acessar com .html
+# Redireciona angels3d.com/sobre.html -> angels3d.com/sobre
+RewriteCond %{THE_REQUEST} \.html[\s?] [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
