@@ -19,6 +19,53 @@
   --ease-fluid: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Catalog order list */
+[hidden] { display: none !important; }
+.order-open {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  z-index: 990; border: 0; border-radius: 999px; padding: 14px 24px;
+  background: var(--text-main); color: white; font: inherit; font-weight: 600;
+  box-shadow: 0 4px 24px #0003; cursor: pointer; white-space: nowrap;
+}
+.order-status {
+  position: fixed; bottom: 92px; left: 50%; transform: translateX(-50%);
+  max-width: min(90vw, 420px); background: #1d1d1f; color: white;
+  padding: 12px 20px; border-radius: 12px; z-index: 10000;
+  opacity: 0; pointer-events: none; text-align: center;
+}
+.order-status.visible { opacity: 1; }
+#order-dialog {
+  margin: auto; padding: 24px; width: min(600px, calc(100% - 24px));
+  max-height: 88dvh; overflow-y: auto; overscroll-behavior: contain;
+  border: 1px solid var(--border-color); border-radius: 20px;
+  background: var(--bg-color); color: var(--text-main);
+}
+#order-dialog::backdrop { background: #0009; }
+.order-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.order-heading h2 { font-size: 1.5rem; }
+#order-dialog button { font: inherit; cursor: pointer; min-height: 44px; }
+#order-close { border: none; background: transparent; font-size: 2rem !important; min-width: 44px; }
+.order-item { padding: 18px 0; border-bottom: 1px solid var(--border-color); }
+.order-item strong { overflow-wrap: anywhere; }
+.order-item p { margin: 4px 0 10px; }
+.order-controls { display: flex; align-items: end; gap: 16px; }
+.order-controls label { display: flex; align-items: center; gap: 12px; }
+.order-controls input { width: 70px; min-height: 44px; padding: 8px; font: inherit; }
+.order-controls button, #order-continue { padding: 8px 12px; background: white; border: 1px solid var(--border-color); border-radius: 8px; }
+#order-dialog > label { display: block; margin-top: 20px; }
+#order-notes { width: 100%; margin-top: 8px; padding: 12px; font: inherit; font-size: 16px; border: 1px solid var(--border-color); border-radius: 8px; resize: vertical; }
+.order-disclaimer { font-size: .875rem; margin: 12px 0; color: #555; }
+#order-send { display: block; text-align: center; padding: 14px; }
+#order-continue { display: block; width: 100%; margin-top: 12px; }
+body:has(.order-open) footer { padding-bottom: 110px; }
+@media (max-width: 600px) {
+  .order-open { bottom: calc(18px + env(safe-area-inset-bottom)); padding: 12px 18px; }
+  #order-dialog { padding: 18px; }
+  .order-controls { flex-wrap: wrap; }
+  .produto-modal { padding: 12px; }
+  .produto-modal-content { max-height: 90dvh; overflow-y: auto; }
+}
+
 * {
   margin: 0;
   padding: 0;

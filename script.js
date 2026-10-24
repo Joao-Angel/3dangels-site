@@ -2,8 +2,8 @@
 const WHATSAPP_NUMBER = "5519991946309";
 const CONTACT_EMAIL   = "angels3dstore@gmail.com";
 
-// Preloader — hide when page is fully loaded
-window.addEventListener('load', () => {
+// Release the page without waiting for off-screen media.
+document.addEventListener('DOMContentLoaded', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
     setTimeout(() => preloader.classList.add('loaded'), 300);
@@ -176,11 +176,17 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', scheduleFrame);
     document.addEventListener('visibilitychange', scheduleFrame);
     window.addEventListener('pageshow', scheduleFrame);
-    // Scroll is an explicit user action: keep it enabled even when the OS
-    // reduces automatic animations. Start loading after listeners are attached.
-    video.preload = 'auto';
-    video.load();
-    scheduleFrame();
+    // Keep posters on data-saving connections and when reduced motion is requested.
+    if (navigator.connection?.saveData || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const loader = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      loader.disconnect();
+      video.src = video.dataset.src;
+      video.preload = 'auto';
+      video.load();
+      scheduleFrame();
+    }, { rootMargin: '200px' });
+    loader.observe(container);
   }
 
   setupScrollVideo('hero-video', 'hero-scroll-container');
@@ -345,11 +351,17 @@ window.abrirModal = function(img, nome, desc, preco) {
   const modal = document.getElementById('produto-modal');
   if (!modal) return;
   document.getElementById('modal-img').src = img;
+  document.getElementById('modal-img').alt = nome;
   document.getElementById('modal-nome').textContent = nome;
   document.getElementById('modal-desc').textContent = desc;
   document.getElementById('modal-preco').textContent = preco;
   document.getElementById('modal-btn-wpp').onclick = function() {
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('Olá! Tenho interesse no produto: ' + nome + ' - ' + preco), '_blank');
+  };
+  const addButton = document.getElementById('modal-add-order');
+  if (addButton) addButton.onclick = () => {
+    window.adicionarAoPedido(nome, img);
+    fecharModal();
   };
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';

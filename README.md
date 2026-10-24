@@ -9,6 +9,7 @@ Site institucional e catálogo da **3D Angels**, empresa de impressão 3D em Ind
 O site usa HTML, CSS e JavaScript puro. Os arquivos de produção ficam na raiz do repositório: não há instalação de dependências, etapa de build ou backend próprio neste projeto.
 
 - Catálogo com categorias, detalhes dos produtos e contato pelo WhatsApp.
+- Lista de pedido com quantidades, remoção de itens e observações para enviar pelo WhatsApp. Os produtos escolhidos ficam salvos neste navegador; as observações não são persistidas.
 - Formulário de orçamento integrado ao FormSubmit.
 - Assistente de atendimento com fluxos e respostas definidos em JavaScript.
 - Páginas de serviços, apresentação da empresa, privacidade e termos de uso.
@@ -30,6 +31,7 @@ O site usa HTML, CSS e JavaScript puro. Os arquivos de produção ficam na raiz 
 ├── styles.css                        # Estilos compartilhados
 ├── script.js                         # Interações, catálogo e formulário
 ├── chatbot.js                        # Fluxos do assistente de atendimento
+├── pedido.js                         # Lista de produtos e mensagem para WhatsApp
 ├── img/                              # Imagens de produtos e do site
 ├── favicons/                         # Ícones e manifesto
 ├── hero_video_keyframed.mp4
@@ -58,6 +60,8 @@ O formulário continua apontando para o serviço externo mesmo na prévia local.
 - **Produtos:** edite os cards em `index.html` e adicione as imagens em `img/catalogo/`. Mantenha nome, descrição, preço, categoria e os dados da chamada `abrirModal(...)` consistentes.
 - **Aparência:** ajuste `styles.css`. Algumas páginas também contêm estilos diretamente no HTML.
 - **Interações:** edite `script.js`; as respostas e opções do assistente ficam em `chatbot.js`.
+- **Lista de pedido:** edite `pedido.js`. Nomes e preços são lidos dos cards do catálogo; os valores finais são confirmados no atendimento.
+- **Mídias:** os cards usam miniaturas WebP de até 800 pixels; mantenha-as atualizadas ao trocar imagens. Os originais são usados nos detalhes. Os vídeos de serviços carregam perto da área visível e permanecem como imagens estáticas com economia de dados ou preferência por movimento reduzido.
 - **Contatos:** revise as constantes `WHATSAPP_NUMBER` e `CONTACT_EMAIL` em `script.js`, além dos links e endereços escritos diretamente nos arquivos HTML.
 - **Formulário:** o destinatário do FormSubmit está no atributo `action` em `orcamento.html`; o campo `_next` define a página de confirmação.
 - **SEO:** ao alterar ou adicionar páginas, revise título, descrição, URL canônica, metadados sociais e `sitemap.xml`. Atualize `lastmod` conforme a data da alteração da página.
@@ -70,7 +74,11 @@ O site utiliza Google Fonts para tipografia, FormSubmit para o envio de orçamen
 
 ## Publicação
 
-A branch principal é `main`. A conexão com a hospedagem e o deploy automático ainda precisam ser configurados.
+A hospedagem do `angels3d.com` está conectada ao repositório `Joao-Angel/3dangels-site` na Hostinger, com a branch `main`, diretório `public_html` e implantação automática ativada (configuração conferida em 24/10/2026).
+
+Após revisar as alterações, faça commit e push para `main`: o push deve acionar a publicação pela integração Git da Hostinger. Um commit apenas local não publica o site. Acompanhe o resultado em **Sites → angels3d.com → Avançado → GIT** e confirme o estado **Concluído**. A implantação manual foi confirmada; o disparo automático ainda precisa ser validado no próximo push. Não há workflow de GitHub Actions para esse deploy.
+
+Para publicação manual, caso necessário:
 
 1. Revise as alterações e faça a verificação manual descrita abaixo.
 2. Publique os arquivos HTML, CSS, JavaScript, imagens, favicons, vídeos, `robots.txt`, `sitemap.xml` e `.htaccess` na raiz pública da hospedagem, preservando nomes e pastas. Preserve também o arquivo HTML de verificação existente na raiz.
