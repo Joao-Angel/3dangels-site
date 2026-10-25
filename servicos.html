@@ -34,7 +34,7 @@
     rel="stylesheet">
   <link rel="preload" as="image" href="img/hero_poster.jpg">
   <link rel="preload" as="image" href="img/logo.png">
-  <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="styles.css?v=18">
 
   <!-- SEO Local (Google) -->
   <script type="application/ld+json">
@@ -172,9 +172,8 @@
     </div>
 
     <!-- Video Showcase Transition -->
-    <div class="video-transition-container" id="video-transition-container" style="height: 300vh; position: relative;">
-      <section
-        style="position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: var(--text-main); z-index: 1;">
+    <div class="video-transition-container" id="video-transition-container">
+      <section class="video-transition-stage">
         <div class="hero-video-bg" style="background: center / cover no-repeat url('img/services_poster.jpg');">
           <video id="transition-video" poster="img/services_poster.jpg" data-src="services_video_keyframed.mp4" preload="none" muted
             playsinline></video>
@@ -344,7 +343,7 @@
     </svg>
   </a>
 
-  <script src="script.js?v=9-order" defer></script>
+  <script src="script.js?v=10-scroll" defer></script>
   <script src="chatbot.js?v=6-icons" defer></script>
 </body>
 

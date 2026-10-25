@@ -61,7 +61,7 @@ O formulário continua apontando para o serviço externo mesmo na prévia local.
 - **Aparência:** ajuste `styles.css`. Algumas páginas também contêm estilos diretamente no HTML.
 - **Interações:** edite `script.js`; as respostas e opções do assistente ficam em `chatbot.js`.
 - **Lista de pedido:** edite `pedido.js`. Nomes e preços são lidos dos cards do catálogo; os valores finais são confirmados no atendimento.
-- **Mídias:** os cards usam miniaturas WebP de até 800 pixels; mantenha-as atualizadas ao trocar imagens. Os originais são usados nos detalhes. Os vídeos de serviços carregam perto da área visível e permanecem como imagens estáticas com economia de dados ou preferência por movimento reduzido.
+- **Mídias:** os cards usam miniaturas WebP de até 800 pixels; mantenha-as atualizadas ao trocar imagens. Os originais são usados nos detalhes. Os vídeos de serviços carregam perto da área visível e avançam ou retrocedem conforme a rolagem, inclusive com preferência por movimento reduzido. Não há reprodução automática; as imagens estáticas servem como alternativa durante o carregamento ou em caso de erro.
 - **Contatos:** revise as constantes `WHATSAPP_NUMBER` e `CONTACT_EMAIL` em `script.js`, além dos links e endereços escritos diretamente nos arquivos HTML.
 - **Formulário:** o destinatário do FormSubmit está no atributo `action` em `orcamento.html`; o campo `_next` define a página de confirmação.
 - **SEO:** ao alterar ou adicionar páginas, revise título, descrição, URL canônica, metadados sociais e `sitemap.xml`. Atualize `lastmod` conforme a data da alteração da página.

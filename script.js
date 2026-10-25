@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById(videoId);
     const container = document.getElementById(containerId);
     if (!video || !container) return;
+    const stickySection = video.closest('section');
 
     let frame = null;
     let failed = false;
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const rect = container.getBoundingClientRect();
       if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
-      const distance = container.offsetHeight - window.innerHeight;
+      const distance = container.offsetHeight - (stickySection?.offsetHeight || window.innerHeight);
       const progress = distance > 0
         ? Math.min(1, Math.max(0, -rect.top / distance))
         : 0;
@@ -176,17 +177,29 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', scheduleFrame);
     document.addEventListener('visibilitychange', scheduleFrame);
     window.addEventListener('pageshow', scheduleFrame);
-    // Keep posters on data-saving connections and when reduced motion is requested.
-    if (navigator.connection?.saveData || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const loader = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      loader.disconnect();
-      video.src = video.dataset.src;
+    // User-controlled scrolling must work even when automatic motion is reduced.
+    // Defer off-screen downloads, but never permanently disable the video.
+    let started = false;
+    function loadVideo() {
+      if (started) return;
+      started = true;
+      const source = video.dataset.src || video.getAttribute('src');
+      if (!source) return;
+      video.muted = true;
+      video.playsInline = true;
+      video.src = source;
       video.preload = 'auto';
       video.load();
       scheduleFrame();
-    }, { rootMargin: '200px' });
-    loader.observe(container);
+    }
+    if ('IntersectionObserver' in window) {
+      const loader = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        loader.disconnect();
+        loadVideo();
+      }, { rootMargin: '600px' });
+      loader.observe(container);
+    } else loadVideo();
   }
 
   setupScrollVideo('hero-video', 'hero-scroll-container');
